@@ -1,0 +1,38 @@
+{
+  "name": "office-branch-api",
+  "version": "1.0.0",
+  "description": "Office Brunch API",
+  "main": "server.js",
+  "engines": {
+    "node": "^12.13.1"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mike-4040/ob-structure.git"
+  },
+  "author": "Mike Kravtsov",
+  "license": "ISC",
+  "bugs": {
+    "url": "hhttps://github.com/mike-4040/ob-structure/issues"
+  },
+  "homepage": "hhttps://github.com/mike-4040/ob-structure#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "inversify": "^5.0.1",
+    "pino": "^5.16.0",
+    "typeorm": "^0.2.22"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.7.5"
+  }
+}
