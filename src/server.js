@@ -2,7 +2,6 @@
 
 import pino from 'pino';
 import express from 'express';
-import path from 'path';
 import { Logger } from './infrastructure/adapters/logger/logger';
 
 const logger = new Logger(pino);
