@@ -10,9 +10,6 @@ const logger = new Logger(pino);
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-
 app.get('/api', (req, res) => res.send('New API!'));
 
 // Todo replace console on logger
