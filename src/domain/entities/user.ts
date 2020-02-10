@@ -3,25 +3,23 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity('User')
 export default class User {
   constructor(
-    userName?: string,
+    email: string,
     firstName?: string,
     lastName?: string,
-    email?: string,
     createdBy?: string,
     updatedBy?: string,
     organization?: string,
   ) {
-    this.userName = userName;
+    this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
     this.createdBy = createdBy;
     this.updatedBy = updatedBy;
     this.organization = organization;
   }
 
-  @PrimaryColumn({ name: 'UserName' })
-  userName: string;
+  @PrimaryColumn({ name: 'Email' })
+  email: string;
 
   @Column({ name: 'FirstName' })
   firstName: string;
@@ -29,15 +27,13 @@ export default class User {
   @Column({ name: 'LastName' })
   lastName: string;
 
-  @Column({ name: 'Email' })
-  email: string;
-
-  @Column({ name: 'Organization' })
-  organization: string;
-
   @Column({ name: 'CreatedBy', nullable: true })
   createdBy: string;
 
   @Column({ name: 'UpdatedBy', nullable: true })
   updatedBy: string;
+
+  // Todo: will be replaced by One-One relation
+  @Column({ name: 'Organization' })
+  organization: string;
 }
