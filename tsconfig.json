@@ -22,7 +22,7 @@
     "declaration": false,
     "listFiles": false,
     "esModuleInterop": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": false
   },
   "exclude": [ "node_modules", "build", "coverage", "dist" ],
   "types": [ "typePatches" ]
