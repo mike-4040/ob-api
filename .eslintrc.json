@@ -4,6 +4,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "import/prefer-default-export": "off"
+    "max-len": ["error", { "code": 150 }],
+    "import/prefer-default-export": "off",
+    "no-unused-vars": ["error", { "args": "none" }]
   }
 }

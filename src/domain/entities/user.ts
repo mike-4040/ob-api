@@ -1,16 +1,18 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, Generated } from 'typeorm';
 
 @Entity('User')
 export default class User {
   constructor(
     email: string,
+    id?: string,
     firstName?: string,
     lastName?: string,
-    createdBy?: string,
-    updatedBy?: string,
+    createdBy?: Date,
+    updatedBy?: Date,
     organization?: string,
   ) {
     this.email = email;
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.createdBy = createdBy;
@@ -18,7 +20,10 @@ export default class User {
     this.organization = organization;
   }
 
-  @PrimaryColumn({ name: 'Email' })
+  @Generated('uuid')
+  id: string;
+
+  @Column({ name: 'Email', unique: true })
   email: string;
 
   @Column({ name: 'FirstName' })
@@ -27,11 +32,11 @@ export default class User {
   @Column({ name: 'LastName' })
   lastName: string;
 
-  @Column({ name: 'CreatedBy', nullable: true })
-  createdBy: string;
+  @Column({ name: 'CreatedDate', nullable: true })
+  createdBy: Date;
 
-  @Column({ name: 'UpdatedBy', nullable: true })
-  updatedBy: string;
+  @Column({ name: 'UpdatedDate', nullable: true })
+  updatedBy: Date;
 
   // Todo: will be replaced by One-One relation
   @Column({ name: 'Organization' })
