@@ -30,8 +30,8 @@ app.use(cors());
 
 // Routing binding
 app.use('/', userRouter);
-app.use((err, req, res) => {
-  handleError(err, res);
+app.use((err, req, res, next) => {
+  handleError(err, res, next);
 });
 
 

@@ -10,7 +10,7 @@
     "start": "node dist/src/app.js",
     "build": "tsc --incremental -p tsconfig.build.json",
     "start:watch": "nodemon",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "lint": " eslint src/**/**.ts",
     "tests": "jest --maxWorkers=1",
     "tests:coverage": "jest --collectCoverage"
   },
