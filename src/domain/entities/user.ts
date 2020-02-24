@@ -7,16 +7,16 @@ export default class User {
     id?: string,
     firstName?: string,
     lastName?: string,
-    createdBy?: Date,
-    updatedBy?: Date,
+    createdDate?: Date,
+    updatedDate?: Date,
     organization?: string,
   ) {
     this.email = email;
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.createdBy = createdBy;
-    this.updatedBy = updatedBy;
+    this.createdDate = createdDate;
+    this.updatedDate = updatedDate;
     this.organization = organization;
   }
 
@@ -33,10 +33,10 @@ export default class User {
   lastName: string;
 
   @Column({ name: 'CreatedDate', nullable: true })
-  createdBy: Date;
+  createdDate: Date;
 
   @Column({ name: 'UpdatedDate', nullable: true })
-  updatedBy: Date;
+  updatedDate: Date;
 
   // Todo: will be replaced by One-One relation
   @Column({ name: 'Organization' })

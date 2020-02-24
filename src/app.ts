@@ -9,9 +9,11 @@ import { createUserRouter } from './api/routes/userRoute';
 import { UserController } from './api/controllers/userController';
 import { UserService } from './business/services/userService';
 import { UserRepository } from './domain/repositories/userRepository';
-import { handleError } from './api/middlewares/errorHandler';
+import { createErrorHandlerMiddleware } from './api/factories/errorHandlerMiddlewareFactory';
+import { authMiddleware } from './api/middlewares/authMiddleware';
 
 const logger = new Logger(pino());
+const handleError = createErrorHandlerMiddleware(logger);
 
 // User API initialization
 const userRepository = new UserRepository({ connection: {} } as EntityManager, {} as EntityMetadata);
@@ -26,13 +28,13 @@ const port = process.env.PORT || 3001;
 // Http server middlewares initialization
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(authMiddleware);
 app.use(cors());
 
 // Routing binding
 app.use('/', userRouter);
-app.use((err, req, res, next) => {
-  handleError(err, res, next);
-});
 
+// Error handling
+app.use(handleError);
 
-app.listen(port, () => logger.info('server', 'initialize', `Example app listening on port ${port}!`));
+app.listen(port, () => logger.info('server', 'initialize', `Office branch API has started on port: ${port}!`));
