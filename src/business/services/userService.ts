@@ -9,6 +9,9 @@ export class UserService {
   ) {
   }
 
+  /**
+   * Gets the list of all users
+   */
   async getAll(): Promise<User[]> {
     const users = [new User('test@ob.com', '123', 'John', 'Smith')];
     this.logger.info(UserService.name, this.getAll.name, 'Received', users);
@@ -16,6 +19,10 @@ export class UserService {
     // return this.userRepository.find();
   }
 
+  /**
+   * Gets user by id
+   * @param id
+   */
   async get(id: string): Promise<User> {
     const user = id === '123' ? new User('test@ob.com', id, 'John', 'Smith') : null;
     this.logger.info(UserService.name, this.getAll.name, 'Received', user);
