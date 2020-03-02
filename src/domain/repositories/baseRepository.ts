@@ -5,7 +5,14 @@ export class BaseRepository<T> extends Repository<T> {
     super();
   }
 
+  /**
+   * Checks connection status
+   */
   async checkConnection() {
+    // Database connection initialization
+    // Check connection: was it expired or not
+    // if expired - reconnect
+    // if not and already exist - reuse
     if (!this.manager.connection.isConnected) {
       await this.manager.connection.connect();
     }
