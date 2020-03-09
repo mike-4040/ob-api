@@ -9,14 +9,13 @@ import { createErrorHandlerMiddleware } from './api/factories/errorHandlerMiddle
 import { authMiddleware } from './api/middlewares/authMiddleware';
 import { ControllerFactory } from './api/factories/controllerFactory';
 import { DbConnectionFactory } from './domain/factories/dbConnectionFactory';
-import { dbConfig } from './config/typeorm';
 import User from './domain/entities/user';
 
 const logger = new Logger(pino());
 const handleError = createErrorHandlerMiddleware(logger);
 
 (async () => {
-  const dbConnectionFactory = new DbConnectionFactory(dbConfig, logger);
+  const dbConnectionFactory = new DbConnectionFactory({ type: 'mysql', url: process.env.DATABASE_URL }, logger);
 
   const connection = await dbConnectionFactory.create([User]);
 
