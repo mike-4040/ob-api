@@ -9,7 +9,6 @@ export class UserController {
   constructor(private readonly logger: Logger, private readonly userService: UserService) {
   }
 
-
   @Auth(Roles.Vendor)
   @Exception()
   async get(req, res, next) {
