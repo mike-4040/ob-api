@@ -1,5 +1,6 @@
 /**
- * UserInterface
+ * UserInterface for API User model.
+ * This is a contract between UI and API.
  */
 export interface UserInterface {
   email: string,
