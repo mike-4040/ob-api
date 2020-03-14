@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm';
 import { Logger } from '../../infrastructure/adapters/logger/logger';
 import { UserService } from '../../business/services/userService';
 import User from '../../domain/entities/user';
@@ -56,6 +57,44 @@ export class UserController {
 
     this.logger.info(UserController.name, this.get.name, req);
     res.send(users);
+    next();
+  }
+
+  @Auth(Roles.Vendor)
+  @Exception()
+  async create(req, res, next) {
+    const user: User = await this.userService.create(req.body.user);
+
+    this.logger.info(UserController.name, this.get.name, 'Created user', user);
+    res.send(user);
+    next();
+  }
+
+  @Auth(Roles.Vendor)
+  @Exception()
+  async update(req, res, next) {
+    const user: User = await this.userService.update(req.params.id, req.body.user);
+
+    this.logger.info(UserController.name, this.get.name, 'Created user', user);
+    res.send(user);
+    next();
+  }
+
+  @Auth(Roles.Vendor)
+  @Exception()
+  async delete(req, res, next) {
+    const result: DeleteResult = await this.userService.delete(req.params.id);
+    if (result.affected) {
+      res.send({
+        message: `Successfully deleted user ${req.params.id}`,
+        count: result.affected
+      });
+    } else {
+      res.send({
+        message: `No such user ${req.params.id} in the system`,
+        count: result.affected
+      });
+    }
     next();
   }
 }
