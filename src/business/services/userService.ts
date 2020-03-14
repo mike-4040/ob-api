@@ -29,5 +29,19 @@ export class UserService {
     return user;
   }
 
+  /**
+   * Creates new user
+   * @param model
+   */
+  async create(model: UserInterface): Promise<User> {
+    const date = new Date();
+    const user = new User(model.email, undefined, model.firstName, model.lastName, date, date, model.organization);
+
+    const result = await this.userRepository.save(user);
+
+    this.logger.info(UserService.name, this.getAll.name, 'Received', result);
+    return result;
+  }
+
   }
 }

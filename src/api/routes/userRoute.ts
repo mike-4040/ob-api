@@ -12,6 +12,7 @@ export function createUserRouter(express, controller: UserController) {
   router.get(`${routeName}/:id`, controller.get.bind(controller));
   router.post(`${routeName}`, controller.getByName.bind(controller));
   router.get(`${routeName}`, controller.getAll.bind(controller));
+  router.post(`${routeName}`, controller.create.bind(controller));
 
   return router;
 }
