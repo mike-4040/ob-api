@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import { config as dotEnvConfig } from 'dotenv';
 import { Logger } from './infrastructure/adapters/logger/logger';
 import { createUserRouter } from './api/routes/userRoute';
 import { createErrorHandlerMiddleware } from './api/factories/errorHandlerMiddlewareFactory';
@@ -10,12 +11,15 @@ import { authMiddleware } from './api/middlewares/authMiddleware';
 import { ControllerFactory } from './api/factories/controllerFactory';
 import { DbConnectionFactory } from './domain/factories/dbConnectionFactory';
 import User from './domain/entities/user';
+import { dbConfig } from './config/typeorm';
+
+dotEnvConfig();
 
 const logger = new Logger(pino());
 const handleError = createErrorHandlerMiddleware(logger);
 
 (async () => {
-  const dbConnectionFactory = new DbConnectionFactory({ type: 'mysql', url: process.env.DATABASE_URL }, logger);
+  const dbConnectionFactory = new DbConnectionFactory(dbConfig, logger);
 
   const connection = await dbConnectionFactory.create([User]);
 
