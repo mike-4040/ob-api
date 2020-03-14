@@ -43,5 +43,20 @@ export class UserService {
     return result;
   }
 
+
+  /**
+   * Updates user by id
+   * @param id
+   * @param model
+   */
+  async update(id: string, model: UserInterface): Promise<User> {
+    const newUser = new User(undefined, id, model.firstName, model.lastName, undefined, new Date(), model.organization);
+
+    await this.userRepository.save(newUser);
+    const user = await this.userRepository.findOne(model.id);
+
+    this.logger.info(UserService.name, this.getAll.name, 'Updated user', user);
+    return user;
+  }
   }
 }
