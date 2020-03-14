@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm';
 import { Logger } from '../../infrastructure/adapters/logger/logger';
 import { UserRepository } from '../../domain/repositories/userRepository';
 import User from '../../domain/entities/user';
@@ -58,5 +59,15 @@ export class UserService {
     this.logger.info(UserService.name, this.getAll.name, 'Updated user', user);
     return user;
   }
+
+  /**
+   * Deletes user by id
+   * @param id
+   */
+  async delete(id: string): Promise<DeleteResult> {
+    const result: DeleteResult = await this.userRepository.delete(id);
+
+    this.logger.info(UserService.name, this.getAll.name, 'Deleted', result);
+    return result;
   }
 }
