@@ -15,8 +15,6 @@ export class UserService {
    * Gets the list of all users
    */
   async getAll(): Promise<User[]> {
-    // const users = [new User('test@ob.com', '123', 'John', 'Smith')];
-    // this.logger.info(UserService.name, this.getAll.name, 'Received', users);
     return this.userRepository.find();
   }
 
