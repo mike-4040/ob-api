@@ -1,6 +1,4 @@
-import {
-  Column, Entity, Generated, PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('User')
 export default class User {
@@ -11,7 +9,7 @@ export default class User {
     lastName?: string,
     createdDate?: Date,
     updatedDate?: Date,
-    organization?: string,
+    organization?: string
   ) {
     this.email = email;
     this.id = id;
@@ -22,10 +20,10 @@ export default class User {
     this.organization = organization;
   }
 
-  @Generated('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @PrimaryColumn({ name: 'Email', unique: true })
+  @Column({ name: 'Email', unique: true })
   email: string;
 
   @Column({ name: 'FirstName' })

@@ -14,21 +14,19 @@ export class DbConnectionFactory {
    */
   constructor(
     private readonly config,
-    private readonly logger: Logger,
+    private readonly logger: Logger
   ) {
   }
 
   /**
    * Creates new SQL DB connection
    * @param entities – TypeORM entities (User, Menu, ..)
-   * @param database – Data Base name
    * @param localCredentials – for local connection or when settings are passed outside this
    * factory
    */
   async create(
     entities,
-    database = this.config.database,
-    localCredentials?: { username: string, password: string, host: string, port: number, type: string },
+    localCredentials?: { database: string, username: string, password: string, host: string, port: number, type: string }
   ) {
     try {
       // it's simple for now, but might be improved in the future
@@ -36,9 +34,8 @@ export class DbConnectionFactory {
       const credentials = localCredentials || await this.config;
 
       const connectionOptions = {
-        database,
         entities,
-        ...credentials,
+        ...credentials
       };
 
       this.logger.info(DbConnectionFactory.name, this.create.name, 'Creating new DB connection');
