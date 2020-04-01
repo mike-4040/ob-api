@@ -1,23 +1,28 @@
 import pino from 'pino';
-import { UserRepository } from '../../domain/repositories/userRepository';
 import { Logger } from '../../infrastructure/adapters/logger/logger';
-import { UserService } from '../../business/services/userService';
 import { UserController } from '../controllers/userController';
+import { AuthController } from '../controllers/authController';
 
-const logger = new Logger(pino());
+const logger: Logger = new Logger(pino());
 
 export class ControllerFactory {
-  constructor(private connection) {
+  constructor(
+    private connection, private readonly authConfig,
+    private readonly userService, private readonly authService
+  ) {
   }
 
   /**
    * Creates UserController instance.
    */
-  async createUserController(): Promise<UserController> {
-    const userRepository = this.connection.getCustomRepository(UserRepository);
+  createUserController(): UserController {
+    return new UserController(logger, this.authConfig, this.userService);
+  }
 
-    // User API initialization
-    const userService = new UserService(logger, userRepository);
-    return new UserController(logger, userService);
+  /**
+   * Creates AuthController instance.
+   */
+  createAuthController(): AuthController {
+    return new AuthController(logger, this.authConfig, this.userService, this.authService);
   }
 }
