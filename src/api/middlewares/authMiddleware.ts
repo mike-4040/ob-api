@@ -5,12 +5,12 @@ export const createAuthMiddleware = (authService: AuthService) => (req, res, nex
   // Temporary added Vendor by default
   const token = req.headers.Authorization;
 
-  // if the cookie is not set, return an unauthorized error
   if (!token) {
     res.status(401);
     return res.end();
   }
 
+  // check expiration
   if (authService.verifyExpiration(token)) {
     res.status(403);
     return res.end();
