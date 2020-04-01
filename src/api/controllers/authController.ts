@@ -3,7 +3,7 @@ import { Exception } from '../decorators/exceptionDecorator';
 import { Logger } from '../../infrastructure/adapters/logger/logger';
 import User from '../../domain/entities/user';
 import { UserService } from '../../business/services/userService';
-import { AuthService } from '../../infrastructure/AuthService/authService';
+import { AuthService } from '../../infrastructure/service/authService';
 
 export class AuthController {
   constructor(

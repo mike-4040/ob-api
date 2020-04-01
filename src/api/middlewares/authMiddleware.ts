@@ -1,7 +1,21 @@
 import { Roles } from '../../config/roles';
+import { AuthService } from '../../infrastructure/service/authService';
 
-export const authMiddleware = (req, res, next) => {
+export const createAuthMiddleware = (authService: AuthService) => (req, res, next) => {
   // Temporary added Vendor by default
+  const token = req.headers.Authorization;
+
+  // if the cookie is not set, return an unauthorized error
+  if (!token) {
+    res.status(401);
+    return res.end();
+  }
+
+  if (authService.verifyExpiration(token)) {
+    res.status(403);
+    return res.end();
+  }
+
   req.context = { role: Roles.Vendor };
-  next();
+  return next();
 };
